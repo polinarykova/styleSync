@@ -14,63 +14,63 @@ export default function () {
         <div className="w-auto px-5">
           <div className="m-2 flex h-44 w-auto flex-col justify-evenly border-2">
             <p className="text-center">Tops</p>
-            <div className="flex justify-center">
+            <a className="flex justify-center" href="./tops">
               <button className="mt-auto rounded-md bg-gray-300 p-1">
                 See {">>"}
               </button>
-            </div>
+            </a>
           </div>
         </div>
         <div className="w-auto px-5">
           <div className="m-2 flex h-44 w-auto flex-col justify-evenly border-2">
             <p className="text-center">Bottoms</p>
-            <div className="flex justify-center">
+            <a className="flex justify-center" href="./bottoms">
               <button className="mt-auto rounded-md bg-gray-300 p-1">
                 See {">>"}
               </button>
-            </div>
+            </a>
           </div>
         </div>
 
         <div className="w-auto px-5">
           <div className="m-2 flex h-44 w-auto flex-col justify-evenly border-2">
             <p className="text-center">Dresses</p>
-            <div className="flex justify-center">
+            <a className="flex justify-center" href="./dresses">
               <button className="mt-auto rounded-md bg-gray-300 p-1">
                 See {">>"}
               </button>
-            </div>
+            </a>
           </div>
         </div>
 
         <div className="w-auto px-5">
           <div className="m-2 flex h-44 w-auto flex-col justify-evenly border-2">
             <p className="text-center">Outwear</p>
-            <div className="flex justify-center">
+            <a className="flex justify-center" href="./outwear">
               <button className="mt-auto rounded-md bg-gray-300 p-1">
                 See {">>"}
               </button>
-            </div>
+            </a>
           </div>
         </div>
         <div className="w-auto px-5">
           <div className="m-2 flex h-44 w-auto flex-col justify-evenly border-2">
             <p className="text-center">Headwear</p>
-            <div className="flex justify-center">
+            <a className="flex justify-center" href="./headwear">
               <button className="mt-auto rounded-md bg-gray-300 p-1">
                 See {">>"}
               </button>
-            </div>
+            </a>
           </div>
         </div>
         <div className="w-auto px-5">
           <div className="m-2 flex h-44 w-auto flex-col justify-evenly border-2">
             <p className="text-center">Accessories</p>
-            <div className="flex justify-center">
+            <a className="flex justify-center" href="./accessories">
               <button className="mt-auto rounded-md bg-gray-300 p-1">
                 See {">>"}
               </button>
-            </div>
+            </a>
           </div>
         </div>
       </div>
