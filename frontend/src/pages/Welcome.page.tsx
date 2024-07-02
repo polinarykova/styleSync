@@ -7,11 +7,11 @@ export default function () {
             <div className="m-5 flex h-auto w-1/2 items-end justify-center border-2 border-black hover:bg-blue-200">
               <a href="/home">
                 <button className="m-10 rounded-md border-blue-500 bg-blue-400 p-5 text-white">
-                  Registers
+                  Register
                 </button>
               </a>
             </div>
-            <div className="bolder-2 m-5 flex h-auto w-1/2 items-end justify-center border-black hover:bg-blue-200">
+            <div className="m-5 flex h-auto w-1/2 items-end justify-center border-2 border-black hover:bg-blue-200">
               <a href="/home">
                 <button className="m-10 rounded-md border-blue-500 bg-blue-400 p-5 text-white">
                   Sign In
