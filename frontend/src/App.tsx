@@ -3,6 +3,8 @@ import "./index.css";
 import WelcomePage from "./pages/Welcome.page";
 import HomePage from "./pages/Home.page";
 import CategoryPage from "./pages/Category.page";
+import AddNewPage from "./pages/AddNew.page";
+
 function App() {
   return (
     <>
@@ -11,6 +13,7 @@ function App() {
           <Route path="/" element={<WelcomePage />}></Route>
           <Route path="/home" element={<HomePage />}></Route>
           <Route path="/:category" element={<CategoryPage />}></Route>
+          <Route path="/:category/add" element={<AddNewPage />}></Route>
         </Routes>
       </BrowserRouter>
     </>
