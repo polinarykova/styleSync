@@ -15,12 +15,12 @@ export default function CategoryPage() {
             </div>
           </div>
         </header>
-        <main className="mt-32 flex flex-grow items-center justify-center">
+        <main className="my-32 flex flex-grow items-center justify-center">
           <div className="mt-8 text-center">{category} page</div>
         </main>
         <footer className="fixed bottom-0 flex h-32 w-screen flex-row bg-white">
           <a className="m-auto" href={`./${category}/add`}>
-            <button className="h-12 w-40 rounded-md bg-blue-500">
+            <button className="h-12 w-40 rounded-md bg-blue-500 text-white">
               Add New
             </button>
           </a>
