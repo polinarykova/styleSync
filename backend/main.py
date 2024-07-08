@@ -4,9 +4,18 @@ from typing import List, Annotated
 import models
 from database import engine, SessionLocal
 from sqlalchemy.orm import Session
-import os
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 models.Base.metadata.create_all(bind=engine)
 
 
@@ -61,8 +70,3 @@ async def add_user(user: UserBase, db: db_dependency):
     db.add(db_user)
     db.commit()
     db.refresh(db_user)
-
-
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
