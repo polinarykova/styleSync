@@ -42,7 +42,6 @@ const CategoryPage: React.FC = () => {
                 <p>ID: {item.id}</p>
                 <p>Description: {item.description}</p>
                 <p>Category: {item.category}</p>
-
                 {item.image_url && (
                   <img
                     src={item.image_url}

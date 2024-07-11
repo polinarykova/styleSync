@@ -13,7 +13,6 @@ export default function () {
 
   //hardcoded user
   const user_id = 1;
-  const description = "for now only here";
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -24,8 +23,14 @@ export default function () {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    const descriptionEl = document.getElementById(
+      "description",
+    ) as HTMLTextAreaElement | null;
+
+    const description = descriptionEl?.value;
+
     const item: IItem = {
-      description: description,
+      description: description ?? "",
       id: 0,
       category: category ?? "",
       user_id: user_id,
@@ -36,6 +41,7 @@ export default function () {
 
     console.log("Submitting with category:", selectedCategory);
     console.log("Submitting with image:", selectedImage);
+    console.log("Submitting with description:", description);
   };
 
   const options = [
@@ -126,6 +132,11 @@ export default function () {
               />
             </div>
           )}
+          <textarea
+            id="description"
+            placeholder="Add description"
+            className="w-72 rounded-md border-2 border-gray-400 p-5"
+          ></textarea>
         </div>
 
         <footer className="fixed bottom-0 flex h-32 w-screen flex-row bg-white">
