@@ -14,7 +14,6 @@ const CategoryPage: React.FC = () => {
         setItemList(data);
       } catch (error) {
         console.error("Error fetching items:", error);
-        // Optionally handle error state
       }
     };
 
@@ -43,6 +42,7 @@ const CategoryPage: React.FC = () => {
                 <p>ID: {item.id}</p>
                 <p>Description: {item.description}</p>
                 <p>Category: {item.category}</p>
+
                 {item.image_url && (
                   <img
                     src={item.image_url}

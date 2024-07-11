@@ -1,6 +1,6 @@
 import { IItem, IItemList } from "../typings/IItem";
 
-const fetchItems = async (
+const getItems = async (
   userId: number,
   category: string,
 ): Promise<IItemList> => {
@@ -23,4 +23,4 @@ const fetchItems = async (
   }
 };
 
-export default fetchItems;
+export default getItems;

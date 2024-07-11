@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
+import { IItem } from "../components/typings/IItem";
+import addItem from "../components/api/addItem";
 
 export default function () {
   const { category } = useParams();
@@ -9,6 +11,10 @@ export default function () {
     category ?? "",
   );
 
+  //hardcoded user
+  const user_id = 1;
+  const description = "for now only here";
+
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       setSelectedImage(URL.createObjectURL(e.target.files[0]));
@@ -17,7 +23,17 @@ export default function () {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    //handle submition to back
+
+    const item: IItem = {
+      description: description,
+      id: 0,
+      category: category ?? "",
+      user_id: user_id,
+      image_url: selectedImage ?? "",
+    };
+
+    addItem(item);
+
     console.log("Submitting with category:", selectedCategory);
     console.log("Submitting with image:", selectedImage);
   };
