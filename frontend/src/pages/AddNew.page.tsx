@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
+import { IItem } from "../components/typings/IItem";
+import addItem from "../components/api/addItem";
 
 export default function () {
   const { category } = useParams();
@@ -9,6 +11,9 @@ export default function () {
     category ?? "",
   );
 
+  //hardcoded user
+  const user_id = 1;
+
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       setSelectedImage(URL.createObjectURL(e.target.files[0]));
@@ -17,9 +22,26 @@ export default function () {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    //handle submition to back
+
+    const descriptionEl = document.getElementById(
+      "description",
+    ) as HTMLTextAreaElement | null;
+
+    const description = descriptionEl?.value;
+
+    const item: IItem = {
+      description: description ?? "",
+      id: 0,
+      category: category ?? "",
+      user_id: user_id,
+      image_url: selectedImage ?? "",
+    };
+
+    addItem(item);
+
     console.log("Submitting with category:", selectedCategory);
     console.log("Submitting with image:", selectedImage);
+    console.log("Submitting with description:", description);
   };
 
   const options = [
@@ -110,6 +132,11 @@ export default function () {
               />
             </div>
           )}
+          <textarea
+            id="description"
+            placeholder="Add description"
+            className="w-72 rounded-md border-2 border-gray-400 p-5"
+          ></textarea>
         </div>
 
         <footer className="fixed bottom-0 flex h-32 w-screen flex-row bg-white">
