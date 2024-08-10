@@ -1,4 +1,5 @@
-from fastapi import FastAPI, HTTPException, Depends
+import base64
+from fastapi import FastAPI, Depends
 from pydantic import BaseModel
 from typing import List, Annotated
 import models
@@ -70,3 +71,14 @@ async def add_user(user: UserBase, db: db_dependency):
     db.add(db_user)
     db.commit()
     db.refresh(db_user)
+
+
+class ImageRequest(BaseModel):
+    imageUrl: str
+
+
+@app.post("/process_image/")
+async def processImage(request: ImageRequest):
+    data = base64.b64decode(request.imageUrl)
+    encoded = base64.b64encode(data)
+    return encoded

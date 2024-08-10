@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { IItem } from "../components/typings/IItem";
-import addItem from "../components/api/addItem";
+import processImage from "../components/api/processImage";
+import { Buffer } from "buffer";
 
 export default function () {
   const { category } = useParams();
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [selectedImageUrl, setSelectedImageUrl] = useState<string | null>(null);
+  const [selectedImageFile, setSelectedImageFile] = useState<File | null>(null);
+  const [processedImage, setProcessedImage] = useState<string | undefined>(
+    undefined,
+  );
   const [isOpen, setIsOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(
     category ?? "",
@@ -14,9 +19,22 @@ export default function () {
   //hardcoded user
   const user_id = 1;
 
+  useEffect(() => {
+    if (selectedImageFile) {
+      // console.log("Selected image file:", selectedImageFile);
+    }
+  }, [selectedImageFile]);
+
+  useEffect(() => {
+    if (processedImage) {
+      //console.log("Procesed image url:", processedImage);
+    }
+  }, [processedImage]);
+
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
-      setSelectedImage(URL.createObjectURL(e.target.files[0]));
+      setSelectedImageUrl(URL.createObjectURL(e.target.files[0]));
+      setSelectedImageFile(e.target.files[0]);
     }
   };
 
@@ -34,14 +52,10 @@ export default function () {
       id: 0,
       category: category ?? "",
       user_id: user_id,
-      image_url: selectedImage ?? "",
+      image_url: selectedImageUrl ?? "",
     };
 
-    addItem(item);
-
-    console.log("Submitting with category:", selectedCategory);
-    console.log("Submitting with image:", selectedImage);
-    console.log("Submitting with description:", description);
+    //addItem(item);
   };
 
   const options = [
@@ -61,6 +75,22 @@ export default function () {
   const handleOptionClick = (option: string) => {
     setSelectedCategory(option);
     setIsOpen(false);
+  };
+
+  const handleGenerateNew = async () => {
+    const decode = (str: string): string =>
+      Buffer.from(str, "base64").toString("binary");
+
+    const encode = (str: string): string =>
+      Buffer.from(str, "binary").toString("base64");
+
+    const image = decode(
+      (await processImage(encode(selectedImageUrl || ""))) || "",
+    );
+
+    console.log(image);
+
+    setProcessedImage(image);
   };
 
   return (
@@ -121,16 +151,28 @@ export default function () {
               </ul>
             )}
           </div>
-          {selectedImage && (
-            <div className="mt-8">
-              <h2 className="mb-2 text-xl font-semibold">Preview:</h2>
-              <img
-                src={selectedImage}
-                alt="Selected"
-                style={{ maxWidth: "300px" }}
-                className="rounded-lg"
-              />
-            </div>
+          {selectedImageUrl && (
+            <>
+              <div className="mt-8">
+                <h2 className="mb-2 text-xl font-semibold">Original:</h2>
+                <img
+                  src={selectedImageUrl}
+                  alt="Selected"
+                  style={{ maxWidth: "300px" }}
+                  className="rounded-lg"
+                />
+                <button onClick={handleGenerateNew}>generate new</button>
+              </div>
+              <div className="mt-8">
+                <h2 className="mb-2 text-xl font-semibold">New:</h2>
+                <img
+                  src={processedImage}
+                  alt="Selected"
+                  style={{ maxWidth: "300px" }}
+                  className="rounded-lg"
+                />
+              </div>
+            </>
           )}
           <textarea
             id="description"
